@@ -1,0 +1,78 @@
+#!/bin/bash
+#CST8102_320 lab 9
+#Karl Rezansoff Student ID: 040955782
+#December 1, 2019
+
+#Script will perform addition or subtraction on
+#the values given as parameters or display
+#a menu instructing user on what to enter
+#and perform addition or subtraction on that
+#user input
+
+#Function for addition
+function add () {
+    echo "the sum of $1 and $2 equals $(($1+$2))"
+    sleep 3
+}
+
+#Function for subtraction
+function subtract () {
+    echo "the difference of $1 and $2 is $(($1-$2))"
+    sleep 3
+}
+
+#Function for displaying menu and taking inputs
+function displayMenu () {
+while :
+do
+
+clear
+echo "C) Calculation"
+echo "X) Exit"
+read -p "Enter Menu Choice: " choice
+
+case $choice in
+[xX])
+echo "Exiting script"; sleep 3; break
+;;
+[cC])
+clear
+read -p "Please enter an integer number or X to exit: " num1
+        if [ $num1 == 'x' ] || [ $num1 == 'X' ]
+                then echo "Exiting script"; sleep 3; break
+                else clear; read -p "+) Add
+-) Subtract
+X) Exit 
+" operator
+                if [ $operator == 'x' ] || [ $operator == 'X' ]
+ then echo "Exiting script"; sleep 3; break
+                        else clear; read -p "Please enter an integer number or X to exit: " num2
+                                if [ $num2 == 'x' ] || [ $num2 == 'X' ]
+                                        then echo "Exiting script"; sleep 3; break
+                                                elif [ $operator == '+' ]
+                                                        then add $num1 $num2
+                                                elif [ $operator == '-' ]
+                                                        then subtract $num1 $num2
+fi
+fi
+fi
+;;
+esac
+done
+
+}
+
+#script starts here
+if [ $# -eq 3 ]
+        then if [ $2 == '+' ]
+                then add $1 $3
+  	elif [ $2 == '-' ]
+                then subtract $1 $3
+        else clear; echo "Invalid parameters"
+        fi
+elif [ $# -eq 0 ]
+        then displayMenu
+else clear ;echo "Invalid parameters" 
+
+fi
+
